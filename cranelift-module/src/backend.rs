@@ -55,7 +55,7 @@ where
     fn declare_function(&mut self, name: &str, linkage: Linkage);
 
     /// Declare a data object.
-    fn declare_data(&mut self, name: &str, linkage: Linkage, writable: bool);
+    fn declare_data(&mut self, name: &str, linkage: Linkage, writable: bool, align: Option<usize>);
 
     /// Define a function, producing the function body from the given `Context`.
     ///

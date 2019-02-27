@@ -163,7 +163,7 @@ impl<'simple_jit_backend> Backend for SimpleJITBackend {
         // Nothing to do.
     }
 
-    fn declare_data(&mut self, _name: &str, _linkage: Linkage, _writable: bool) {
+    fn declare_data(&mut self, _name: &str, _linkage: Linkage, _writable: bool, align: Option<usize>) {
         // Nothing to do.
     }
 

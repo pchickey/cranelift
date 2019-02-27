@@ -185,6 +185,7 @@ pub struct DataDeclaration {
     pub name: String,
     pub linkage: Linkage,
     pub writable: bool,
+    pub align: Option<usize>,
 }
 
 /// A data object belonging to a `Module`.
@@ -433,6 +434,7 @@ where
         name: &str,
         linkage: Linkage,
         writable: bool,
+        align: Option<usize>,
     ) -> ModuleResult<DataId> {
         // TODO: Can we avoid allocating names so often?
         use super::hash_map::Entry::*;
@@ -442,7 +444,7 @@ where
                     let existing = &mut self.contents.data_objects[id];
                     existing.merge(linkage, writable);
                     self.backend
-                        .declare_data(name, existing.decl.linkage, existing.decl.writable);
+                        .declare_data(name, existing.decl.linkage, existing.decl.writable, existing.decl.align);
                     Ok(id)
                 }
 
@@ -456,11 +458,12 @@ where
                         name: name.to_owned(),
                         linkage,
                         writable,
+                        align,
                     },
                     compiled: None,
                 });
                 entry.insert(FuncOrDataId::Data(id));
-                self.backend.declare_data(name, linkage, writable);
+                self.backend.declare_data(name, linkage, writable, align);
                 Ok(id)
             }
         }
