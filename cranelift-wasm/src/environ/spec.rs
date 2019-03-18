@@ -1,5 +1,5 @@
 //! All the runtime support necessary for the wasm to cranelift translation is formalized by the
-//! traits `FunctionEnvironment` and `ModuleEnvironment`.
+//! traits `FuncEnvironment` and `ModuleEnvironment`.
 //!
 //! There are skeleton implementations of these traits in the `dummy` module, and complete
 //! implementations in [Wasmtime].
